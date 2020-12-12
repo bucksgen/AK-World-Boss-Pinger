@@ -57,6 +57,17 @@ async def posthere(ctx):
 
 
 @bot.command()
+async def dontpost(ctx):
+    if ctx.author.id == 114881658045464581:
+        res = db.search(channel_query.channel == ctx.channel.id)
+        if len(res) > 0:
+            for item in db:
+                db.remove(channel_query.channel == ctx.channel.id)
+        else:
+            await ctx.channel.send("This channel not registered.")
+
+
+@bot.command()
 async def sauce(ctx):
     await ctx.channel.send("https://github.com/bucksgen/AK-World-Boss-Pinger")
 
